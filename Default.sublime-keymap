@@ -1,14 +1,12 @@
 [
-	
-    { "keys": ["ctrl+shift+t"], "command": "sbs_compare", "caption": "Compare with Tab" },
-    { "keys": ["ctrl+shift+l"], "command": "sbs_compare", "args": {"last_selections": true}, "caption": "Compare with Last View" },
-    { "keys": ["ctrl+shift+v"], "command": "show_version_history", "caption": "Show Version History" },
-    { "keys": ["ctrl+shift+delete"], "command": "clear_file_history", "caption": "Clear File History" },
-    { "keys": ["ctrl+shift+,"], "command": "versioned_hx_settings", "caption": "Settings" }
-    // { "keys": ["ctrl+shift+n"], "command": "sbs_next_diff", "caption": "Next" },
-    // { "keys": ["ctrl+shift+p"], "command": "sbs_prev_diff", "caption": "Previous" },
-    // { "keys": [], "command": "sbs_compare", "args": {"compare_selections": true}, "caption": "Compare Selections" },
-    // { "keys": [], "command": "sbs_mark_sel", "caption": "Mark Target Selection" },
-    // { "keys": [], "command": "sbs_compare", "args": {"with_active": true}, "caption": "Compare with Active View" },
-
+    { "keys": ["ctrl+shift+t"], "command": "sbs_comparex" },
+    { "keys": ["ctrl+shift+l"], "command": "sbs_comparex", "args": {"last_selections": true} },
+    { "keys": ["ctrl+shift+v"], "command": "show_version_history" },
+    { "keys": ["ctrl+shift+delete"], "command": "sbs_clear_file_history" },
+    { "keys": ["ctrl+shift+,"], "command": "sbs_versioned_hx_settings" }
+    // { "keys": ["ctrl+shift+n"], "command": "sbs_next_diff" },
+    // { "keys": ["ctrl+shift+p"], "command": "sbs_prev_diff" },
+    // { "keys": [], "command": "sbs_comparex", "args": {"compare_selections": true} },
+    // { "keys": [], "command": "sbs_mark_selx" },
+    // { "keys": [], "command": "sbs_comparex", "args": {"with_active": true} }
 ]

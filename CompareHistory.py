@@ -70,7 +70,7 @@ class SbsLayoutPreserver(sublime_plugin.EventListener):
 sbs_markedSelection = ''
 
 
-class sbs_mark_sel(sublime_plugin.TextCommand):
+class sbs_mark_selx(sublime_plugin.TextCommand):
     def run(self, edit):
         global sbs_markedSelection
         sel = self.view.sel()[0]
@@ -89,7 +89,7 @@ last_file = [None,None]
 def get_view_contents(view):
         return view.substr(sublime.Region(0, view.size()))
 
-class sbs_compare(sublime_plugin.TextCommand):
+class sbs_comparex(sublime_plugin.TextCommand):
     def is_enabled(self, compare_selections=False , last_selections=False):
         if compare_selections:
             return len(self.view.sel()) == 2 or any(sbs_markedSelection)
@@ -500,7 +500,7 @@ class FileWatcher(sublime_plugin.EventListener):
 
 
 
-class VersionedHxSettings(sublime_plugin.ApplicationCommand):
+class SbsVersionedHxSettings(sublime_plugin.ApplicationCommand):
     def run(self):
         settings = sublime.load_settings('Preferences.sublime-settings')
         current_base = settings.get('versioned_history_base', os.path.expanduser("~/.cache"))
@@ -521,7 +521,7 @@ class VersionedHxSettings(sublime_plugin.ApplicationCommand):
             sublime.active_window().run_command("set_versioned_history_limit")
 
 
-# class SetVersionedHistoryBase(sublime_plugin.WindowCommand):
+# class SbsSetVersionedHistoryBase(sublime_plugin.WindowCommand):
 #     def run(self):
 #         def on_done(text):
 #             if text:
@@ -532,7 +532,7 @@ class VersionedHxSettings(sublime_plugin.ApplicationCommand):
         
 #         self.window.show_input_panel("History Base Directory:", 
 #                                      os.path.expanduser("~/.cache"), on_done, None, None)
-class SetVersionedHistoryBase(sublime_plugin.WindowCommand):
+class SbsSetVersionedHistoryBase(sublime_plugin.WindowCommand):
     def run(self):
         settings = sublime.load_settings('Preferences.sublime-settings')
         current_base = settings.get('versioned_history_base', os.path.expanduser("~/.cache"))
@@ -552,7 +552,7 @@ class SetVersionedHistoryBase(sublime_plugin.WindowCommand):
         )
 
 
-class SetVersionedHistoryLimit(sublime_plugin.WindowCommand):
+class SbsSetVersionedHistoryLimit(sublime_plugin.WindowCommand):
     def run(self):
         settings = sublime.load_settings('Preferences.sublime-settings')
         current_limit = str(settings.get('versioned_history_limit', 10))
@@ -578,7 +578,7 @@ class SetVersionedHistoryLimit(sublime_plugin.WindowCommand):
             None
         )
 
-class ClearFileHistory(sublime_plugin.TextCommand):
+class SbsClearFileHistory(sublime_plugin.TextCommand):
     def is_visible(self):
         return bool(self.view.file_name())
     
@@ -600,7 +600,7 @@ class ClearFileHistory(sublime_plugin.TextCommand):
 
 
 
-class ShowVersionHistoryCommand(sublime_plugin.TextCommand):
+class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
     def is_visible(self):
         return bool(self.view.file_name())
 

@@ -10,6 +10,10 @@ CompareHistory combines **side-by-side file comparison** with **automatic versio
 
 ---
 
+## 🙏 Thanks
+
+Inspired by [Compare Side-By-Side](https://github.com/kaste/Compare-Side-By-Side) – thanks to [kaste](https://github.com/kaste)!
+
 ## ✨ Key Features
 
 - **📊 Side-by-Side Comparison** – Compare files, selections, or versions
