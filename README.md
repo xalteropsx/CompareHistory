@@ -97,7 +97,17 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 
 ---
 
-## Additional Key Settings
+## CompareHistory Key Settings
+
+```json
+[
+    { "keys": ["ctrl+shift+v"], "command": "show_version_history" },
+    { "keys": ["ctrl+shift+delete"], "command": "sbs_clear_file_history" },
+    { "keys": ["ctrl+shift+,"], "command": "sbs_versioned_hx_settings" }
+]
+```
+
+## How to Enable Additional Commands
 
 ```json
 [
@@ -110,6 +120,11 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
     { "keys": ["ctrl+shift+l"], "command": "sbs_comparex", "args": {"last_selections": true} }
 ]
 ```
+
+1. Open **Command Palette** (`Ctrl+Shift+P`)
+2. Type `Preferences: Key Bindings`
+3. Copy the desired line and remove the `//` comment
+4. Save the file
 
 
 ## 📁 Storage Location
