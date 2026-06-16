@@ -2,38 +2,38 @@
     
     {
         "caption": "CompareHistory: Compare with Tab",
-        "command": "sbs_comparex"
+        "command": "ch_compare"
     },
     {
         "caption": "CompareHistory: Compare Selections",
-        "command": "sbs_comparex",
+        "command": "ch_compare",
         "args": { "compare_selections": true }
     },
     {
         "caption": "CompareHistory: Mark Target Selection",
-        "command": "sbs_mark_selx"
+        "command": "ch_mark_sel"
     },
     {
         "caption": "CompareHistory: Compare with Active View",
-        "command": "sbs_comparex",
+        "command": "ch_compare",
         "args": { "with_active": true }
     },
     {
         "caption": "CompareHistory: Compare with Last View",
-        "command": "sbs_comparex",
+        "command": "ch_compare",
         "args": { "last_selections": true }
     },
     {
         "caption": "CompareHistory: Show Version History",
-        "command": "sbs_show_version_history"
+        "command": "ch_show_version_history"
     },
     {
         "caption": "CompareHistory: Clear File History",
-        "command": "sbs_clear_file_history"
+        "command": "ch_clear_file_history"
     },
     {
         "caption": "CompareHistory: Settings",
-        "command": "sbs_versioned_hx_settings"
+        "command": "ch_versioned_hx_settings"
     }
 
 ]

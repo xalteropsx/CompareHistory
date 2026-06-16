@@ -4,17 +4,17 @@
     {
         "caption": "Version History",
         "children": [
-            { "command": "sbs_comparex", "caption": "Compare with Tab" },
-            { "command": "sbs_comparex", "args": {"compare_selections": true}, "caption": "Compare Selections" },
-            { "command": "sbs_mark_selx", "caption": "Mark Target Selection" },
-            { "command": "sbs_comparex", "args": {"with_active": true}, "caption": "Compare with Active View" },
-            { "command": "sbs_comparex", "args": {"last_selections": true}, "caption": "Compare with Last View" },
+            { "command": "ch_compare", "caption": "Compare with Tab" },
+            { "command": "ch_compare", "args": {"compare_selections": true}, "caption": "Compare Selections" },
+            { "command": "ch_mark_sel", "caption": "Mark Target Selection" },
+            { "command": "ch_compare", "args": {"with_active": true}, "caption": "Compare with Active View" },
+            { "command": "ch_compare", "args": {"last_selections": true}, "caption": "Compare with Last View" },
             { "caption": "-" },
-            { "command": "sbs_next_diff", "caption": "Next" },
-            { "command": "sbs_prev_diff", "caption": "Previous" },
-            { "command": "sbs_show_version_history", "caption": "Show Version History" },
-            { "command": "sbs_clear_file_history", "caption": "Clear File History" },
-            { "command": "sbs_versioned_hx_settings", "caption": "Settings" },
+            { "command": "ch_next_diff", "caption": "Next" },
+            { "command": "ch_prev_diff", "caption": "Previous" },
+            { "command": "ch_show_version_history", "caption": "Show Version History" },
+            { "command": "ch_clear_file_history", "caption": "Clear File History" },
+            { "command": "ch_versioned_hx_settings", "caption": "Settings" },
 
         ]
     }   

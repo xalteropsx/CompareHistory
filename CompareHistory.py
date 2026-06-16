@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime
 import gzip
 
-def sbs_settings():
+def ch_settings():
     class Settings:
         def __init__(self):
             self.defaults = {
@@ -50,7 +50,7 @@ def triplewise(iterable):
     return zip(t1, t2, t3)
 
 
-class sbs_replace_view_contents(sublime_plugin.TextCommand):
+class ch_replace_view_contents(sublime_plugin.TextCommand):
     def run(self, edit, text):
         view = self.view
         readonly = view.is_read_only()
@@ -61,27 +61,27 @@ class sbs_replace_view_contents(sublime_plugin.TextCommand):
             view.set_read_only(True)
 
 
-class SbsLayoutPreserver(sublime_plugin.EventListener):
+class ChLayoutPreserver(sublime_plugin.EventListener):
     def on_pre_close(self, view):
-        if view.settings().get('is_sbs_compare'):
+        if view.settings().get('is_ch_compare'):
             sublime.set_timeout(lambda: view.window().run_command('close_window'), 10)
 
 
-sbs_markedSelection = ''
+ch_markedSelection = ''
 
 
-class sbs_mark_selx(sublime_plugin.TextCommand):
+class ch_mark_sel(sublime_plugin.TextCommand):
     def run(self, edit):
-        global sbs_markedSelection
+        global ch_markedSelection
         sel = self.view.sel()[0]
-        sbs_markedSelection = self.view.substr(sel)
+        ch_markedSelection = self.view.substr(sel)
 
-# class sbs_compare_files(sublime_plugin.ApplicationCommand):
+# class ch_compare_files(sublime_plugin.ApplicationCommand):
 #     def run(self, A=None, B=None):
-#         global sbs_files
+#         global ch_files
 #         if A and B and os.path.isfile(A) and os.path.isfile(B):
-#             sbs_files = [os.path.abspath(A), os.path.abspath(B)]
-#             sublime.active_window().run_command('sbs_compare')
+#             ch_files = [os.path.abspath(A), os.path.abspath(B)]
+#             sublime.active_window().run_command('ch_compare')
 
 
 last_file = [None,None]
@@ -89,10 +89,10 @@ last_file = [None,None]
 def get_view_contents(view):
         return view.substr(sublime.Region(0, view.size()))
 
-class sbs_comparex(sublime_plugin.TextCommand):
+class ch_compare(sublime_plugin.TextCommand):
     def is_enabled(self, compare_selections=False , last_selections=False):
         if compare_selections:
-            return len(self.view.sel()) == 2 or any(sbs_markedSelection)
+            return len(self.view.sel()) == 2 or any(ch_markedSelection)
         if last_selections:
             return  last_file[0] is not None
         return True
@@ -101,22 +101,22 @@ class sbs_comparex(sublime_plugin.TextCommand):
    
 
     def run(self, edit, with_active=False, group=-1, index=-1, compare_selections=False, last_selections=False):
-        global sbs_markedSelection, sbs_files,last_file
+        global ch_markedSelection, ch_files,last_file
         
         view = self.view
         window = view.window()
         
-        # if sbs_files:
-        #     v1, v2 = window.open_file(sbs_files[0]), window.open_file(sbs_files[1])
-        #     self.compare_after_load(v1, v2, sbs_files[0], sbs_files[1])
-        #     sbs_files.clear()
+        # if ch_files:
+        #     v1, v2 = window.open_file(ch_files[0]), window.open_file(ch_files[1])
+        #     self.compare_after_load(v1, v2, ch_files[0], ch_files[1])
+        #     ch_files.clear()
         if compare_selections:
             sel = view.sel()
             if len(sel) == 2:
                 textA, textB = view.substr(sel[0]), view.substr(sel[1])
             else:
-                textA, textB = self.view.substr(sel[0]), sbs_markedSelection or view.substr(sel[0])
-                # sbs_markedSelection = ''
+                textA, textB = self.view.substr(sel[0]), ch_markedSelection or view.substr(sel[0])
+                # ch_markedSelection = ''
             self.create_comparison(textA, textB, view.settings().get('syntax'), 'selection A', 'selection B')
         else:
             tabs = [(v.file_name() or v.name() or 'untitled', v) for v in window.views() if v.id() != view.id()]
@@ -181,7 +181,7 @@ class sbs_comparex(sublime_plugin.TextCommand):
         new_win = sublime.active_window()
         new_win.set_layout({"cols": [0.0, 0.5, 1.0], "rows": [0.0, 1.0], "cells": [[0,0,1,1], [1,0,2,1]]})
         
-        settings = sbs_settings()
+        settings = ch_settings()
         for attr in ['sidebar', 'menu', 'minimap', 'status_bar', 'tabs']:
             if settings.get(f'hide_{attr}', False):
                 getattr(new_win, f'set_{attr}_visible')(False)
@@ -201,7 +201,7 @@ class sbs_comparex(sublime_plugin.TextCommand):
         
         for v in (v1, v2):
             v.set_scratch(True)
-            v.settings().set("is_sbs_compare", True)
+            v.settings().set("is_ch_compare", True)
             v.settings().set('word_wrap', False)
             if settings.get('read_only', False):
                 v.set_read_only(True)
@@ -217,8 +217,8 @@ class sbs_comparex(sublime_plugin.TextCommand):
     def compare_views(cls, v1, v2, t1, t2):
         textA, textB, highlightsA, highlightsB, intraline = compute_diff(t1, t2)
         
-        v1.run_command('sbs_replace_view_contents', {'text': textA})
-        v2.run_command('sbs_replace_view_contents', {'text': textB})
+        v1.run_command('ch_replace_view_contents', {'text': textA})
+        v2.run_command('ch_replace_view_contents', {'text': textB})
         
         for v in (v1, v2):
             v.sel().clear()
@@ -234,14 +234,14 @@ def compute_diff(text1, text2):
     linesB = deque(text2.splitlines(False))
     
     diff_text1, diff_text2 = text1, text2
-    if sbs_settings().has('ignore_pattern'):
-        p = re.compile(sbs_settings().get('ignore_pattern'), re.MULTILINE)
+    if ch_settings().has('ignore_pattern'):
+        p = re.compile(ch_settings().get('ignore_pattern'), re.MULTILINE)
         diff_text1 = p.sub('', diff_text1)
         diff_text2 = p.sub('', diff_text2)
-    if sbs_settings().get('ignore_whitespace', False):
+    if ch_settings().get('ignore_whitespace', False):
         diff_text1 = re.sub(r'[ \t]', '', diff_text1)
         diff_text2 = re.sub(r'[ \t]', '', diff_text2)
-    if sbs_settings().get('ignore_case', False):
+    if ch_settings().get('ignore_case', False):
         diff_text1, diff_text2 = diff_text1.lower(), diff_text2.lower()
     
     diff = difflib.ndiff(diff_text1.splitlines(False), diff_text2.splitlines(False), charjunk=None)
@@ -318,7 +318,7 @@ def highlight_lines(view, lines, col):
             draw_flags
         )
     
-    view.settings().set('sbs_markers', markers)
+    view.settings().set('ch_markers', markers)
 
 
 
@@ -356,13 +356,13 @@ class ViewScrollSyncer:
         sublime.set_timeout(self.run, 10)
 
 
-class sbs_prev_diff(sublime_plugin.TextCommand):
+class ch_prev_diff(sublime_plugin.TextCommand):
     def is_visible(self):
-        return self.view.settings().get("is_sbs_compare", False)
+        return self.view.settings().get("is_ch_compare", False)
     
     def run(self, edit, string=''):
         pos = self.view.sel()[0].begin()
-        markers = self.view.settings().get('sbs_markers', [])
+        markers = self.view.settings().get('ch_markers', [])
         found = None
         for m in reversed(markers):
             if m < pos:
@@ -374,13 +374,13 @@ class sbs_prev_diff(sublime_plugin.TextCommand):
             self.view.show(found)
 
 
-class sbs_next_diff(sublime_plugin.TextCommand):
+class ch_next_diff(sublime_plugin.TextCommand):
     def is_visible(self):
-        return self.view.settings().get("is_sbs_compare", False)
+        return self.view.settings().get("is_ch_compare", False)
     
     def run(self, edit, string=''):
         pos = self.view.sel()[0].begin()
-        markers = self.view.settings().get('sbs_markers', [])
+        markers = self.view.settings().get('ch_markers', [])
         for m in markers:
             if m > pos:
                 self.view.sel().clear()
@@ -500,7 +500,7 @@ class FileWatcher(sublime_plugin.EventListener):
 
 
 
-class SbsVersionedHxSettings(sublime_plugin.ApplicationCommand):
+class ChVersionedHxSettings(sublime_plugin.ApplicationCommand):
     def run(self):
         settings = sublime.load_settings('Preferences.sublime-settings')
         current_base = settings.get('versioned_history_base', os.path.expanduser("~/.cache"))
@@ -521,7 +521,7 @@ class SbsVersionedHxSettings(sublime_plugin.ApplicationCommand):
             sublime.active_window().run_command("set_versioned_history_limit")
 
 
-# class SbsSetVersionedHistoryBase(sublime_plugin.WindowCommand):
+# class ChSetVersionedHistoryBase(sublime_plugin.WindowCommand):
 #     def run(self):
 #         def on_done(text):
 #             if text:
@@ -532,7 +532,7 @@ class SbsVersionedHxSettings(sublime_plugin.ApplicationCommand):
         
 #         self.window.show_input_panel("History Base Directory:", 
 #                                      os.path.expanduser("~/.cache"), on_done, None, None)
-class SbsSetVersionedHistoryBase(sublime_plugin.WindowCommand):
+class ChSetVersionedHistoryBase(sublime_plugin.WindowCommand):
     def run(self):
         settings = sublime.load_settings('Preferences.sublime-settings')
         current_base = settings.get('versioned_history_base', os.path.expanduser("~/.cache"))
@@ -552,7 +552,7 @@ class SbsSetVersionedHistoryBase(sublime_plugin.WindowCommand):
         )
 
 
-class SbsSetVersionedHistoryLimit(sublime_plugin.WindowCommand):
+class ChSetVersionedHistoryLimit(sublime_plugin.WindowCommand):
     def run(self):
         settings = sublime.load_settings('Preferences.sublime-settings')
         current_limit = str(settings.get('versioned_history_limit', 10))
@@ -578,7 +578,7 @@ class SbsSetVersionedHistoryLimit(sublime_plugin.WindowCommand):
             None
         )
 
-class SbsClearFileHistory(sublime_plugin.TextCommand):
+class ChClearFileHistory(sublime_plugin.TextCommand):
     def is_visible(self):
         return bool(self.view.file_name())
     
@@ -600,7 +600,7 @@ class SbsClearFileHistory(sublime_plugin.TextCommand):
 
 
 
-class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
+class ChShowVersionHistoryCommand(sublime_plugin.TextCommand):
     def is_visible(self):
         return bool(self.view.file_name())
 
@@ -655,7 +655,7 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
     def show_version(self, content, version_index=None):
         window = self.view.window()
         new_view = window.new_file()
-        new_view.run_command('sbs_replace_view_contents', {'text': content})
+        new_view.run_command('ch_replace_view_contents', {'text': content})
         new_view.set_name(f"Version {len(self.versions)-version_index if version_index is not None else 'History'}")
         new_view.set_scratch(True)
         new_view.assign_syntax(self.syntax)
@@ -727,7 +727,7 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
 
         
         master = new_win.new_file()
-        master.run_command('sbs_replace_view_contents', {'text': current_content})
+        master.run_command('ch_replace_view_contents', {'text': current_content})
         master.set_name("Current")
         master.set_scratch(True)
         master.assign_syntax(current_syntax)
@@ -749,7 +749,7 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
                 tab_index = 0
 
             v = new_win.new_file()
-            v.run_command('sbs_replace_view_contents', {'text': version})
+            v.run_command('ch_replace_view_contents', {'text': version})
             v.set_name(f"v{num_versions - idx}")
             v.set_scratch(True)
             v.assign_syntax(current_syntax)
@@ -757,11 +757,11 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
             version_views.append(v)
 
             if idx == 0:
-                # sbs_compare.compare_views(master, v, current_content, version)
-                threading.Thread(target=lambda: sbs_compare.compare_views(master, v, current_content, version)).start()
+                # ch_compare.compare_views(master, v, current_content, version)
+                threading.Thread(target=lambda: ch_compare.compare_views(master, v, current_content, version)).start()
             else:
-                # sbs_compare.compare_views(lastv[0], v, lastv[1], version)
-                threading.Thread(target=lambda: sbs_compare.compare_views(lastv[0], v, lastv[1], version)).start()
+                # ch_compare.compare_views(lastv[0], v, lastv[1], version)
+                threading.Thread(target=lambda: ch_compare.compare_views(lastv[0], v, lastv[1], version)).start()
                 # self.hypercolor(v,current_content,version)
 
             lastv = [v,version]
@@ -775,8 +775,8 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
     def hypercolor(v1, t1, t2):
         textA, textB, highlightsA, highlightsB, intraline = compute_diff(t1, t2)
         
-        v1.run_command('sbs_replace_view_contents', {'text': textA})
-        # v2.run_command('sbs_replace_view_contents', {'text': textB})
+        v1.run_command('ch_replace_view_contents', {'text': textA})
+        # v2.run_command('ch_replace_view_contents', {'text': textB})
         
         # for v in (v1, v2):
         v1.sel().clear()
@@ -804,8 +804,8 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
         v1.assign_syntax(self.syntax)
         v2.assign_syntax(self.syntax)
         
-        v1.run_command('sbs_replace_view_contents', {'text': text1})
-        v2.run_command('sbs_replace_view_contents', {'text': text2})
+        v1.run_command('ch_replace_view_contents', {'text': text1})
+        v2.run_command('ch_replace_view_contents', {'text': text2})
         
         for v in (v1, v2):
             v.set_scratch(True)
@@ -815,6 +815,6 @@ class SbsShowVersionHistoryCommand(sublime_plugin.TextCommand):
         new_win.set_view_index(v2, 1, 0)
         
         # Compare the two versions
-        sbs_compare.compare_views(v1, v2, text1, text2)
+        ch_compare.compare_views(v1, v2, text1, text2)
         ViewScrollSyncer(new_win, [v1, v2])
 

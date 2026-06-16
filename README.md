@@ -29,8 +29,6 @@ Inspired by [Compare Side-By-Side](https://github.com/kaste/Compare-Side-By-Side
 
 | Command | Keybinding |
 |---------|------------|
-| Compare with Tab | `Ctrl+Shift+T` |
-| Compare with Last View | `Ctrl+Shift+L` |
 | Show Version History | `Ctrl+Shift+V` |
 | Clear File History | `Ctrl+Shift+Delete` |
 | Settings | `Ctrl+Shift+,` |
@@ -97,14 +95,36 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 
 ---
 
-##additional key setting
-// { "keys": ["ctrl+shift+n"], "command": "sbs_next_diff" },
-// { "keys": ["ctrl+shift+p"], "command": "sbs_prev_diff" },
-// { "keys": [], "command": "sbs_comparex", "args": {"compare_selections": true} },
-// { "keys": [], "command": "sbs_mark_selx" },
-// { "keys": [], "command": "sbs_comparex", "args": {"with_active": true} }
-// { "keys": ["ctrl+shift+t"], "command": "sbs_comparex" },
-// { "keys": ["ctrl+shift+l"], "command": "sbs_comparex", "args": {"last_selections": true} },
+
+## CompareHistory Key Settings
+
+```json
+[
+    { "keys": ["ctrl+shift+v"], "command": "show_version_history" },
+    { "keys": ["ctrl+shift+delete"], "command": "sbs_clear_file_history" },
+    { "keys": ["ctrl+shift+,"], "command": "sbs_versioned_hx_settings" }
+]
+```
+
+## How to Enable Additional Commands
+
+```json
+[
+    { "keys": ["ctrl+shift+n"], "command": "sbs_next_diff" },
+    { "keys": ["ctrl+shift+p"], "command": "sbs_prev_diff" },
+    { "keys": [], "command": "sbs_comparex", "args": {"compare_selections": true} },
+    { "keys": [], "command": "sbs_mark_selx" },
+    { "keys": [], "command": "sbs_comparex", "args": {"with_active": true} },
+    { "keys": ["ctrl+shift+t"], "command": "sbs_comparex" },
+    { "keys": ["ctrl+shift+l"], "command": "sbs_comparex", "args": {"last_selections": true} }
+]
+```
+
+1. Open **Command Palette** (`Ctrl+Shift+P`)
+2. Type `Preferences: Key Bindings`
+3. Copy the desired line
+4. Save the file
+
 
 ## 📁 Storage Location
 
