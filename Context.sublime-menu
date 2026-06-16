@@ -1,0 +1,21 @@
+[
+
+    {
+        "caption": "Version History",
+        "children": [
+            { "command": "sbs_compare", "caption": "Compare with Tab" },
+            { "command": "sbs_compare", "args": {"compare_selections": true}, "caption": "Compare Selections" },
+            { "command": "sbs_mark_sel", "caption": "Mark Target Selection" },
+            { "command": "sbs_compare", "args": {"with_active": true}, "caption": "Compare with Active View" },
+            { "command": "sbs_compare", "args": {"last_selections": true}, "caption": "Compare with Last View" },
+            { "caption": "-" },
+            { "command": "sbs_next_diff", "caption": "Next" },
+            { "command": "sbs_prev_diff", "caption": "Previous" },
+            { "command": "show_version_history", "caption": "Show Version History" },
+            { "command": "clear_file_history", "caption": "Clear File History" },
+            { "command": "versioned_hx_settings", "caption": "Settings" },
+
+        ]
+    }
+    
+]
