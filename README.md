@@ -96,20 +96,14 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 ---
 
 
-## CompareHistory Key Settings
+
+## How to Enable CompareHistory Key Settings
 
 ```json
 [
     { "keys": ["ctrl+shift+v"], "command": "ch_show_version_history" },
     { "keys": ["ctrl+shift+delete"], "command": "ch_clear_file_history" },
     { "keys": ["ctrl+shift+,"], "command": "ch_versioned_hx_settings" }
-]
-```
-
-## How to Enable Additional Commands
-
-```json
-[
     { "keys": ["ctrl+shift+n"], "command": "ch_next_diff" },
     { "keys": ["ctrl+shift+p"], "command": "ch_prev_diff" },
     { "keys": [], "command": "ch_comparex", "args": {"compare_selections": true} },

@@ -1,7 +1,3 @@
 [
 
-    { "keys": ["ctrl+shift+v"], "command": "ch_show_version_history" },
-    { "keys": ["ctrl+shift+delete"], "command": "ch_clear_file_history" },
-    { "keys": ["ctrl+shift+,"], "command": "ch_versioned_hx_settings" }
-
 ]

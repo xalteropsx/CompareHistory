@@ -1,5 +1,9 @@
 [
-    
+    {
+        "caption": "Preferences: CompareHistory Settings",
+        "command": "edit_settings",
+        "args": {"base_file": "${packages}/CompareHistory/CompareHistory.sublime-settings", "default": "{\n\t$0\n}\n"}
+    },
     {
         "caption": "CompareHistory: Compare with Tab",
         "command": "ch_compare"
