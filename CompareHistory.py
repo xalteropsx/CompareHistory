@@ -12,35 +12,36 @@ from pathlib import Path
 from datetime import datetime
 import gzip
 
-def ch_settings():
-    class Settings:
-        def __init__(self):
-            self.defaults = {
-                "read_only": False,
-                "outlines_only": False,
-                "ignore_whitespace": False,
-                "ignore_case": False,
-                "ignore_pattern": "",
-                "hide_sidebar": False,
-                "hide_menu": False,
-                "hide_minimap": False,
-                "hide_status_bar": False,
-                "hide_tabs": False,
-                "display_prefix": "",
-                "line_count_popup": False,
+# def ch_settings():
+#     class Settings:
+#         def __init__(self):
+#             self.defaults = {
+#                 "read_only": False,
+#                 "outlines_only": False,
+#                 "ignore_whitespace": False,
+#                 "ignore_case": False,
+#                 "ignore_pattern": "",
+#                 "hide_sidebar": False,
+#                 "hide_menu": False,
+#                 "hide_minimap": False,
+#                 "hide_status_bar": False,
+#                 "hide_tabs": False,
+#                 "display_prefix": "",
+#                 "line_count_popup": False,
 
-            }
+#             }
         
-        def get(self, key, default=None):
-            return self.defaults.get(key, default)
+#         def get(self, key, default=None):
+#             return self.defaults.get(key, default)
         
-        def has(self, key):
-            return key in self.defaults
+#         def has(self, key):
+#             return key in self.defaults
     
-    return Settings()
+#     return Settings()
 
 
-
+def ch_settings():
+    return sublime.load_settings('CompareHistory.sublime-settings')
 
 def triplewise(iterable):
     t1, t2, t3 = tee(iterable, 3)
@@ -296,7 +297,7 @@ def highlight_lines(view, lines, col):
         line_region = view.line(line_start)
         regions.append(line_region)
     # Use DRAW_OUTLINED for outline only
-    draw_flags = sublime.DRAW_OUTLINED
+    draw_flags = sublime.DRAW_OUTLINED if ch_settings().get('outlines_only', False) else sublime.DRAW_NO_OUTLINE
     # print(regions,markers)
     # if len(regions[0]):
     if col == 'A':
@@ -730,6 +731,7 @@ class ChShowVersionHistoryCommand(sublime_plugin.TextCommand):
         master.run_command('ch_replace_view_contents', {'text': current_content})
         master.set_name("Current")
         master.set_scratch(True)
+        master.settings().set("is_ch_compare", True)
         master.assign_syntax(current_syntax)
         new_win.set_view_index(master, 0, 0)
 
@@ -752,6 +754,7 @@ class ChShowVersionHistoryCommand(sublime_plugin.TextCommand):
             v.run_command('ch_replace_view_contents', {'text': version})
             v.set_name(f"v{num_versions - idx}")
             v.set_scratch(True)
+            v.settings().set("is_ch_compare", True)
             v.assign_syntax(current_syntax)
             new_win.set_view_index(v, target_group, tab_index)
             version_views.append(v)
@@ -809,6 +812,7 @@ class ChShowVersionHistoryCommand(sublime_plugin.TextCommand):
         
         for v in (v1, v2):
             v.set_scratch(True)
+            v.settings().set("is_ch_compare", True)
             v.settings().set('word_wrap', False)
         
         new_win.set_view_index(v1, 0, 0)

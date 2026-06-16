@@ -1,0 +1,16 @@
+[
+  {
+    "keys": ["alt+n"],
+    "command": "ch_next_diff",
+    "context": [
+      { "key": "setting.is_ch_compare" }
+    ]
+  },
+  {
+    "keys": ["alt+p"],
+    "command": "ch_prev_diff",
+    "context": [
+      { "key": "setting.is_ch_compare" }
+    ]
+  }
+]

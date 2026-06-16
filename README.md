@@ -78,13 +78,13 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 | `versioned_history_limit` | Max versions to keep per file | `10` |
 
 
-| Setting | Description | ReadOnly |
+| Setting | Description | Editable |
 |---------|-------------|---------|
 | `read_only` | Make comparison views read-only | `false` |
 | `ignore_whitespace` | Ignore spaces when comparing | `false` |
 | `ignore_case` | Case-insensitive comparison | `false` |
 | `ignore_pattern` | Regex pattern to ignore | `""` |
-| `outlines_only` | Show outlines instead of filled regions | `false` |
+| `outlines_only` | Show outlines instead of filled regions | `true` |
 | `hide_sidebar` | Hide sidebar in comparison window | `false` |
 | `hide_menu` | Hide menu bar | `false` |
 | `hide_minimap` | Hide minimap | `false` |

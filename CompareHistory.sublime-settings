@@ -1,3 +1,14 @@
 {
-	
+    "read_only": false,              // Make compared views read-only
+    "outlines_only": true,         // Use outlines instead of filled regions
+    "ignore_whitespace": false,     // Ignore spaces/tabs when comparing
+    "ignore_case": false,           // Case-insensitive comparison
+    "ignore_pattern": "",           // Regex pattern to ignore (e.g., "\\s+")
+    "hide_sidebar": false,          // Hide sidebar in comparison window
+    "hide_menu": false,             // Hide menu bar
+    "hide_minimap": false,          // Hide minimap
+    "hide_status_bar": false,       // Hide status bar
+    "hide_tabs": false,             // Hide tabs
+    "display_prefix": "",           // Prefix for view names
+    "line_count_popup": false       // Show diff count in popup instead of status bar
 }
