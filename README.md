@@ -100,9 +100,9 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 
 ```json
 [
-    { "keys": ["ctrl+shift+v"], "command": "show_version_history" },
-    { "keys": ["ctrl+shift+delete"], "command": "sbs_clear_file_history" },
-    { "keys": ["ctrl+shift+,"], "command": "sbs_versioned_hx_settings" }
+    { "keys": ["ctrl+shift+v"], "command": "ch_show_version_history" },
+    { "keys": ["ctrl+shift+delete"], "command": "ch_clear_file_history" },
+    { "keys": ["ctrl+shift+,"], "command": "ch_versioned_hx_settings" }
 ]
 ```
 
@@ -110,13 +110,13 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 
 ```json
 [
-    { "keys": ["ctrl+shift+n"], "command": "sbs_next_diff" },
-    { "keys": ["ctrl+shift+p"], "command": "sbs_prev_diff" },
-    { "keys": [], "command": "sbs_comparex", "args": {"compare_selections": true} },
-    { "keys": [], "command": "sbs_mark_selx" },
-    { "keys": [], "command": "sbs_comparex", "args": {"with_active": true} },
-    { "keys": ["ctrl+shift+t"], "command": "sbs_comparex" },
-    { "keys": ["ctrl+shift+l"], "command": "sbs_comparex", "args": {"last_selections": true} }
+    { "keys": ["ctrl+shift+n"], "command": "ch_next_diff" },
+    { "keys": ["ctrl+shift+p"], "command": "ch_prev_diff" },
+    { "keys": [], "command": "ch_comparex", "args": {"compare_selections": true} },
+    { "keys": [], "command": "ch_mark_selx" },
+    { "keys": [], "command": "ch_comparex", "args": {"with_active": true} },
+    { "keys": ["ctrl+shift+t"], "command": "ch_comparex" },
+    { "keys": ["ctrl+shift+l"], "command": "ch_comparex", "args": {"last_selections": true} }
 ]
 ```
 
