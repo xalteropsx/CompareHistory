@@ -34,13 +34,10 @@ Inspired by [Compare Side-By-Side](https://github.com/kaste/Compare-Side-By-Side
 | Settings | `Ctrl+Shift+,` |
 
 <details>
-<summary>Additional Commands (commented out by default)</summary>
+<summary>Existing Commands only Active in Compare View</summary>
 
 | Command | Keybinding |
 |---------|------------|
-| Compare Selections | *(uncomment to enable)* |
-| Mark Target Selection | *(uncomment to enable)* |
-| Compare with Active View | *(uncomment to enable)* |
 | Next Difference | `Ctrl+Shift+N` |
 | Previous Difference | `Ctrl+Shift+P` |
 
@@ -101,16 +98,16 @@ Access via `Ctrl+Shift+,` or menu: **Preferences → Package Settings → Compar
 
 ```json
 [
-    { "keys": ["ctrl+shift+v"], "command": "ch_show_version_history" },
-    { "keys": ["ctrl+shift+delete"], "command": "ch_clear_file_history" },
-    { "keys": ["ctrl+shift+,"], "command": "ch_versioned_hx_settings" }
-    { "keys": ["ctrl+shift+n"], "command": "ch_next_diff" },
-    { "keys": ["ctrl+shift+p"], "command": "ch_prev_diff" },
-    { "keys": [], "command": "ch_comparex", "args": {"compare_selections": true} },
-    { "keys": [], "command": "ch_mark_selx" },
-    { "keys": [], "command": "ch_comparex", "args": {"with_active": true} },
-    { "keys": ["ctrl+shift+t"], "command": "ch_comparex" },
-    { "keys": ["ctrl+shift+l"], "command": "ch_comparex", "args": {"last_selections": true} }
+    { "keys": ["ctrl+shift+v"], "command": "ch_show_version_history" }, // Show all saved versions for current file
+    { "keys": ["ctrl+shift+delete"], "command": "ch_clear_file_history" }, // Delete all version history for current file
+    { "keys": ["ctrl+shift+,"], "command": "ch_versioned_hx_settings" }, // Open CompareHistory settings
+    { "keys": ["ctrl+shift+n"], "command": "ch_next_diff" }, // Jump to next difference in compare view
+    { "keys": ["ctrl+shift+p"], "command": "ch_prev_diff" }, // Jump to previous difference in compare view
+    { "keys": ["ctrl+shift+t"], "command": "ch_compare" }, // Compare with another open tab
+    { "keys": ["ctrl+shift+l"], "command": "ch_compare", "args": {"last_selections": true} }, // Compare with last viewed file
+    { "keys": [], "command": "ch_compare", "args": {"compare_selections": true} }, // Compare two selected text blocks
+    { "keys": [], "command": "ch_mark_sel" }, // Mark current selection for later comparison
+    { "keys": [], "command": "ch_compare", "args": {"with_active": true} } // Compare with active view in other group
 ]
 ```
 
